@@ -17,3 +17,18 @@ spec:
           image: artdengun/javabasic
           ports:
             - containerPort: 80
+---
+# https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service
+kind: Service
+apiVersion: v1
+metadata:
+  name: java-deployment-service
+spec:
+  selector:
+    app: java
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 31000
+  type: NodePort
